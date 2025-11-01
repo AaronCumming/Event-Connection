@@ -5,6 +5,16 @@ from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 
 # Create your models here.
+class Record(models.Model):
+
+    name = models.CharField(max_length=255)
+    value = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
+
+
 class Event(models.Model):
     """
     Event model representing a student-submitted or approved event.
@@ -124,27 +134,6 @@ class Event(models.Model):
 
 
 
-def validate_cune_email(email):
-    """
-    Validates an email to be an cune.edu or student.cune.edu email.
-    """
-    allowed_domains = ["cune.edu", "student.cune.edu"]
-    if not any(email.endswith("@" + d) for d in allowed_domains):
-        raise ValidationError("Email must be a @cune.edu or @student.cune.edu address.")
-
-class User(AbstractUser):
-    """
-    Extends the built-in User model.
-    """
-    email = models.EmailField(
-        unique=True,
-        validators=[validate_cune_email],
-        verbose_name="Email Address",
-        help_text="Email must be @cune.edu or @student.cune.edu"
-    )
-
-    def __str__(self):
-        return self.get_full_name() or self.username
 
 
 
