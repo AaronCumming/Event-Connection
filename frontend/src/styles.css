@@ -1,0 +1,10 @@
+body {
+  background-color: #F7F4ED; /* Warm white */
+  margin: 0;
+  font-family: 'Gotham Book', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #192C53;
+}

@@ -44,6 +44,9 @@ class Event(models.Model):
         verbose_name="Event Date and Time",
         help_text="The time and day when the event is scheduled to occur."
     )
+
+    # optional end time
+
     location = models.CharField(
         max_length=511,
         verbose_name="Event Location",

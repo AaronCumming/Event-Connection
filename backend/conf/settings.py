@@ -11,9 +11,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -71,9 +77,13 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",   # React dev
+    "http://localhost:",   # React dev
+    "http://localhost:5173",  # Vite dev server
+    "http://127.0.0.1:5173",
     #"http://localhost:19000",  # React Native expo (if used)
 ]
+
+
 
 ROOT_URLCONF = 'conf.urls'
 
