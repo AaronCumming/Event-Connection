@@ -45,7 +45,13 @@ class Event(models.Model):
         help_text="The time and day when the event is scheduled to occur."
     )
 
-    # optional end time
+    event_end_time = models.DateTimeField(
+        blank=True,
+        null=True,
+        verbose_name="Event Ending Date and Time",
+        help_text="If it is appropriate, the time and day when the event is scheduled to end."
+    )
+
 
     location = models.CharField(
         max_length=511,

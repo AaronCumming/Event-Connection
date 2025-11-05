@@ -40,14 +40,24 @@ export default function App() {
 */}
 
 // App.jsx
-
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, createTheme } from "@mantine/core";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./routes/Home";
 
+// Define Concordia theme colors
+const theme = createTheme({
+  fontFamily: "Inter, sans-serif",
+  colors: {
+    cuneBlue: ["#192C53"],
+    cuneLightBlue: ["#5A9DBF"],
+    cuneCream: ["#F7F4ED"],
+  },
+  primaryColor: "cuneBlue",
+});
+
 export default function App() {
   return (
-    <MantineProvider>
+    <MantineProvider theme={theme} defaultColorScheme="light">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
