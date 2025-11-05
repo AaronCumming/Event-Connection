@@ -39,12 +39,14 @@ export default function Home() {
 
 
 // routes/Home.jsx
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Container, Title, Card, Text, Image, Center, Stack, Divider, Group, Grid } from "@mantine/core";
+import { Container, Title, Card, Text, Button, Center, Stack, } from "@mantine/core";
 import { getEvents } from "../api/events";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getEvents().then((data) => {
@@ -55,7 +57,7 @@ export default function Home() {
   return (
     <div
       style={{
-        backgroundColor: "rgba(245, 245, 245, 1)",
+        backgroundColor: "#ffffffff",
         minHeight: "100vh",
         paddingBottom: "3rem",
         display: "flex",
@@ -86,66 +88,129 @@ export default function Home() {
           <Stack align="center" gap="xl" style={{ width: "100%" }}>
             {events.map((event) => (
               <Card
-              key={event.id}
-              shadow="lg"
-              radius="lg"
-              withBorder
-              style={{
-                backgroundColor: "#FFFFFF",
-                border: "2px solid #192C53",
-                width: "100%",
-                maxWidth: 1000,
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "stretch",
-                gap: "2rem",
-                padding: "2rem",
-              }}
-            >
-              {/* Left side */}
-              <div style={{ flex: 1, textAlign: "left" }}>
-                <Title order={2} style={{ color: "#192C53" }}>
-                  {event.name || "Untitled Event"}
-                </Title>
-                <Text style={{ color: "#333", lineHeight: 1.5 }}>
-                  {event.short_description || "No description."}
-                </Text>
-                <Text>
-                  <strong>Date:</strong>{" "}
-                  {event.event_time
-                    ? new Date(event.event_time).toLocaleString()
-                    : "No date provided"}
-                </Text>
-                <Text>
-                  <strong>Location:</strong>{" "}
-                  <span>
-                    {event.location || "N/A"}
-                  </span>
-                </Text>
-              </div>
-
-              {/* Right side */}
-              <div style={{ flex: 1 }}>
-                {event.image && (
-                  <img
-                    src={
-                      event.image?.startsWith("http")
-                        ? event.image
-                        : `http://127.0.0.1:8000${event.image}`
-                    }
-                    alt={event.name}
+                key={event.id}
+                shadow="lg"
+                radius="lg"
+                withBorder
+                onClick={() => navigate(`/events/${event.id}`)}
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  border: "2px solid #192C53",
+                  width: "100%",
+                  maxWidth: 1000,
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: "2rem",
+                  padding: "1.5rem 2rem",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                  cursor: "pointer",
+                  flexWrap: "wrap", // responsive stacking
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.02)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 20px rgba(25, 44, 83, 0.18)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                {/* Left side (text) */}
+                <div
+                  style={{
+                    flex: "1 1 55%",
+                    minWidth: 260,
+                    textAlign: "left",
+                  }}
+                >
+                  <Title order={2} style={{ color: "#192C53" }}>
+                    {event.name || "Untitled Event"}
+                  </Title>
+                  <Text
                     style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                      border: "1px solid #192C53",
+                      color: "#333",
+                      lineHeight: 1.5,
+                      marginTop: 8,
+                      marginBottom: 8,
                     }}
-                  />
-                )}
-              </div>
-            </Card>
+                  >
+                    {event.short_description || "No description."}
+                  </Text>
+                  <Text style={{ marginBottom: 4 }}>
+                    <strong>Date:</strong>{" "}
+                    {event.event_time
+                      ? new Date(event.event_time).toLocaleString()
+                      : "No date provided"}
+                  </Text>
+                  <Text>
+                    <strong>Location:</strong>{" "}
+                    <span>
+                      {event.location || "N/A"}
+                    </span>
+                  </Text>
 
+                  <Button
+                    mt="md"
+                    color="#5A9DBF"
+                    variant="filled"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/events/${event.id}`);
+                    }}
+                  >
+                    More Details
+                  </Button>
+                </div>
+
+                {/* Right side (image) */}
+                <div
+                  style={{
+                    flex: "1 1 40%",
+                    minWidth: 240,
+                    maxWidth: 400,
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  {event.image ? (
+                    <img
+                      src={
+                        event.image?.startsWith("http")
+                          ? event.image
+                          : `http://127.0.0.1:8000${event.image}`
+                      }
+                      alt={event.name}
+                      style={{
+                        width: "100%",
+                        maxHeight: 320,
+                        objectFit: "cover",
+                        borderRadius: 10,
+                        border: "1px solid #192C53",
+                        display: "block",
+                      }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: "100%",
+                        height: 200,
+                        background: "#f0f0f0",
+                        borderRadius: 10,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#888",
+                        border: "1px solid #dcdcdc",
+                      }}
+                    >
+                      No image
+                    </div>
+                  )}
+                </div>
+              </Card>
             ))}
           </Stack>
         )}
