@@ -140,10 +140,12 @@ export default function Home() {
                     {event.short_description || "No description."}
                   </Text>
                   <Text style={{ marginBottom: 4 }}>
-                    <strong>Date:</strong>{" "}
-                    {event.event_time
-                      ? new Date(event.event_time).toLocaleString()
-                      : "No date provided"}
+                  <strong>Date:</strong>{" "}
+                  {event.event_time
+                    ? new Date(event.event_time).toLocaleString([], {timeStyle: "short", dateStyle: "full"})
+                    : "No date provided"} - {event.event_time
+                    ? new Date(event.event_end_time).toLocaleString([], {timeStyle: "short"})
+                    : "No date provided"}
                   </Text>
                   <Text>
                     <strong>Location:</strong>{" "}

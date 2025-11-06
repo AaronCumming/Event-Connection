@@ -75,7 +75,8 @@ class Event(models.Model):
         verbose_name="Notes for SLO",
         help_text="Internal notes for the Student Life Office regarding this event."
     )
-
+    
+    # Not displayed publicly to the students
     # Not submitted by student, autocompleted
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,

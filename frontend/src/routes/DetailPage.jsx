@@ -39,7 +39,39 @@ export default function DetailPage() {
       </Button>
 
       <Group align="flex-start" grow>
-        {/* Image Left */}
+        {/* Text Left */}
+            <div style={{ flex: 2 }}>
+          <Title order={1} style={{ color: "#192C53" }}>
+            {event.name}
+          </Title>
+          <Divider my="sm" />
+          <Text size="lg" mb="sm">
+            <strong>Date:</strong>{" "}
+            {event.event_time
+              ? new Date(event.event_time).toLocaleString([], {timeStyle: "short", dateStyle: "full"})
+              : "No date provided"} - {event.event_time
+              ? new Date(event.event_end_time).toLocaleString([], {timeStyle: "short"})
+              : "No date provided"}
+          </Text>
+          <Text size="lg" mb="sm">
+            <strong>Location:</strong> {event.location || "N/A"}
+          </Text>
+          <Text size="lg" mb="sm">
+            <strong>Contact Info:</strong> {event.contact_email || "N/A"}
+          </Text>
+          <Divider my="sm" />
+            <Text size="md" style={{ lineHeight: 1.6 }}>
+            {event.short_description}
+          </Text>
+
+          <Text size="md" style={{ lineHeight: 1.6 }}>
+            {event.long_description}
+          </Text>
+
+        </div>
+        
+
+        {/* Image Right */}
         <div style={{ flex: 1 }}>
           <Image
             src={
@@ -53,31 +85,6 @@ export default function DetailPage() {
           />
         </div>
 
-        {/* Text Right */}
-        <div style={{ flex: 2 }}>
-          <Title order={1} style={{ color: "#192C53" }}>
-            {event.name}
-          </Title>
-          <Divider my="sm" />
-          <Text size="lg" mb="sm">
-            <strong>Date:</strong>{" "}
-            {event.event_time
-              ? new Date(event.event_time).toLocaleString()
-              : "No date provided"}
-          </Text>
-          <Text size="lg" mb="sm">
-            <strong>Location:</strong> {event.location || "N/A"}
-          </Text>
-          <Text size="lg" mb="sm">
-            <strong>Contact Info:</strong> {event.contact_info || "N/A"}
-          </Text>
-          <Divider my="sm" />
-          <Text size="md" style={{ lineHeight: 1.6 }}>
-            {event.long_description ||
-              event.short_description ||
-              "No additional details provided."}
-          </Text>
-        </div>
       </Group>
     </Container>
   );
