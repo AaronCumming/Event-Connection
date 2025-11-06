@@ -75,11 +75,25 @@ def get_event_image():
 # Times
 def random_event_time():
     """Return a timezone-aware datetime between 9:00 AM and 10:00 PM, on the hour or half-hour."""
-    base_date = timezone.now().date() + timedelta(days=random.randint(0, 30))
-    hour = random.randint(9, 21)  # 9 AM through 9 PM inclusive
+    base_date = weighted_event_date()
+    hour = random.randint(9, 21)
     minute = random.choice([0, 30])
     dt = datetime.combine(base_date, time(hour, minute))
     return timezone.make_aware(dt)
+
+def weighted_event_date():
+    """Weighted toward near-term events."""
+    roll = random.random()
+    if roll < 0.40:
+        # 40% chance: today or tomorrow
+        days_ahead = random.randint(0, 1)
+    elif roll < 0.65:
+        # Next 25% chance: days 2–7
+        days_ahead = random.randint(2, 7)
+    else:
+        # Remaining 35%: days 8–30
+        days_ahead = random.randint(8, 30)
+    return timezone.now().date() + timedelta(days=days_ahead)
 
 
 
@@ -135,14 +149,20 @@ class EventFactory(factory.django.DjangoModelFactory):
     notes_for_slo = factory.LazyAttribute(lambda _: fake.sentence(nb_words=12))
 
     created_by = factory.SubFactory(UserFactory)
-    status = factory.LazyFunction(lambda: random.choice(["approved", "pending", "denied"]))
+    status = factory.LazyFunction(
+        lambda: random.choices(
+            ["approved", "pending", "denied"],
+            weights=[75, 15, 10],
+            k=1
+        )[0]
+    )
     reason_denied = factory.LazyAttribute(
         lambda obj: None if obj.status != "denied" else fake.sentence(nb_words=8)
     )
 
 
 
-def generate_sample_data(num_users=5, num_events=20):
+def generate_sample_data(num_users=5, num_events=50):
     """
     Generate sample CUNE users and events for testing.
     """
