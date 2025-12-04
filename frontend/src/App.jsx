@@ -45,6 +45,8 @@ import { MantineProvider, createTheme } from "@mantine/core";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./routes/Home";
 import DetailPage from "./routes/DetailPage";
+import Calendar from "./routes/Calendar";
+import Banner from "./components/Banner";
 
 // Define Concordia theme colors
 const theme = createTheme({
@@ -61,9 +63,11 @@ export default function App() {
   return (
     <MantineProvider theme={theme} defaultColorScheme="light" withGlobalStyles withNormalizeCSS>
       <BrowserRouter>
+        <Banner />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/events/:id" element={<DetailPage />} />
+          <Route path="/calendar" element={<Calendar />} />
         </Routes>
       </BrowserRouter>
     </MantineProvider>
