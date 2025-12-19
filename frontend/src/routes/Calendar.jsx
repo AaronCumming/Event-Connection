@@ -138,6 +138,8 @@ export default function CalendarView() {
     );
   };
   const filteredEvents = getFilteredEvents();
+  const eventsForGrid =
+    activeView === "month" ? events : filteredEvents;
 
   // ---- Get days for grid ----
   const getDaysForView = () => {
@@ -262,9 +264,11 @@ export default function CalendarView() {
         }}
       >
         {daysToShow.map((day) => {
-          const dayEvents = filteredEvents.filter((e) =>
-            dayjs(e.event_time).isSame(day, "day")
-          );
+          const dayEvents = eventsForGrid
+            .filter((e) => dayjs(e.event_time).isSame(day, "day"))
+            .sort((a, b) =>
+              dayjs(a.event_time).valueOf() - dayjs(b.event_time).valueOf()
+            );
           const isToday = day.isSame(dayjs(), "day");
           const isPastDay = day.isBefore(dayjs().startOf("day"));
 

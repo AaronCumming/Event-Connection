@@ -4,20 +4,11 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 
-# Create your models here.
-class Record(models.Model):
-
-    name = models.CharField(max_length=255)
-    value = models.IntegerField()
-
-    def __str__(self):
-        return self.name
-
 
 
 class Event(models.Model):
     """
-    Event model representing a student-submitted or approved event.
+    Event model representing an event that is or might take place on campus.
     """
 
     class Status(models.TextChoices):

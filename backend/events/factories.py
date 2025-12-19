@@ -83,16 +83,16 @@ def random_event_time():
 
 def weighted_event_date():
     """Weighted toward near-term events."""
-    roll = random.random()
+    """roll = random.random()
     if roll < 0.40:
         # 40% chance: today or tomorrow
         days_ahead = random.randint(0, 1)
     elif roll < 0.65:
         # Next 25% chance: days 2–7
         days_ahead = random.randint(2, 7)
-    else:
-        # Remaining 35%: days 8–30
-        days_ahead = random.randint(8, 30)
+    else:"""
+    # Remaining 35%: days 8–30
+    days_ahead = random.randint(10, 16)
     return timezone.now().date() + timedelta(days=days_ahead)
 
 
@@ -152,7 +152,7 @@ class EventFactory(factory.django.DjangoModelFactory):
     status = factory.LazyFunction(
         lambda: random.choices(
             ["approved", "pending", "denied"],
-            weights=[75, 15, 10],
+            weights=[99, 1, 1],
             k=1
         )[0]
     )
