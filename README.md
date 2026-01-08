@@ -1,6 +1,6 @@
-# Event-Connection
+# Event Connection
 
-Event-Connection is a web application designed to centralize campus events for students at Concordia University, Nebraska. This project addresses the lack of a student-focused platform for discovering events, RSVP-ing, and receiving notifications—helping students engage more fully in campus life.
+Event Connection is a web application designed to centralize campus events for students at Concordia University, Nebraska. This project addresses the lack of a student focused platform for discovering events, RSVPs, and receiving notifications which helps students engage more fully in campus life.
 
 ## Backstory
 
@@ -8,18 +8,17 @@ Students at Concordia University currently find out about events through posters
 
 To solve this, Event-Connection was developed as a full-stack web application that:
 
-Allows students to view and filter events in an organized interface.
+1. Allows students to view and filter events in an organized interface.
 
-Enables students to submit events for approval by the Student Life Office (SLO).
+2. Enables students to submit events for approval by the Student Life Office (SLO).
 
-Tracks RSVPs to help event organizers understand attendance.
+3. Tracks RSVPs to help event organizers understand attendance.
 
-Sends notifications for RSVPed events to ensure students don’t miss them.
+4. Sends notifications for RSVPed events to ensure students don’t miss them.
 
-The system improves event discovery, centralizes student engagement, and provides actionable data to campus administrators.
+5. The system improves event discovery, centralizes student engagement, and provides actionable data to campus administrators.
 
 ## Features
-### Minimum Viable Product (MVP)
 
 - Event Viewing: Students can browse events by date (today, this week, this month, or custom), or search by keyword.
 
@@ -55,7 +54,7 @@ The system improves event discovery, centralizes student engagement, and provide
 
 - Mantine for UI components
 
-- Future Expansion:
+### Future Expansion:
 
 - React Native Mobile App (not in MVP)
 
@@ -63,7 +62,7 @@ The system improves event discovery, centralizes student engagement, and provide
 
 - Event categories, clubs, and follow functionality
 
-## How to Use
+## How to Preview
 1. Clone the Repository
 ```
 git clone https://github.com/AaronCumming/Event-Connection.git
