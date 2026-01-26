@@ -38,7 +38,7 @@ To solve this, Event-Connection was developed as a full-stack web application th
 
 ### Backend:
 
-- Django
+- Django (written in Python)
 
 - Django REST Framework
 
@@ -48,7 +48,7 @@ To solve this, Event-Connection was developed as a full-stack web application th
 
 ### Frontend:
 
-- React (Web Application)
+- React (Written in JavaScript)
 
 - React Router for navigation
 
